@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions - Finance App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/transactions.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Finance</h2>
+          <p>Personal Tracker</p>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li>
+            <a href="transactions.html" class="active">✈️ Transactions</a>
+          </li>
+          <li><a href="categories.html">🏷️ Categories</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+        <button id="logoutBtn" class="btn-logout">Sign Out</button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Top Header with User Info -->
+        <div class="top-header">
+          <h1 class="page-title">Transactions</h1>
+          <div class="user-info">
+            <div class="user-details">
+              <p id="userDisplayName">John Doe</p>
+              <p id="userEmail">john@example.com</p>
+            </div>
+            <div class="user-avatar">👤</div>
+          </div>
+        </div>
+
+        <!-- Page Description and Export Button -->
+        <div class="page-intro">
+          <div class="intro-text">
+            <h2>Transactions</h2>
+            <p>View and manage all your financial transactions</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn-export">⬇ Export CSV</button>
+            <button id="addTransactionBtn" class="btn-add-transaction">
+              + Add Transaction
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card income-card">
+            <div class="stat-label">Total Income</div>
+            <div class="stat-amount income" id="totalIncome">$0.00</div>
+            <div class="stat-count" id="incomeCount">+2</div>
+          </div>
+          <div class="stat-card expense-card">
+            <div class="stat-label">Total Expense</div>
+            <div class="stat-amount expense" id="totalExpenses">$0.00</div>
+            <div class="stat-count" id="expenseCount">4</div>
+          </div>
+          <div class="stat-card balance-card">
+            <div class="stat-label">Net Balance</div>
+            <div class="stat-amount" id="netBalance">$0.00</div>
+            <div class="stat-count" id="balanceCount">6 total</div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+          <h3>Filters</h3>
+          <div class="filters">
+            <div class="filter-group">
+              <label>Search</label>
+              <div class="search-input">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search transactions..."
+                />
+              </div>
+            </div>
+            <div class="filter-group">
+              <label>Type</label>
+              <select id="typeFilter">
+                <option value="all">All Types</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Category</label>
+              <select id="categoryFilter">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+            <button class="btn-clear-filters">Clear Filters</button>
+          </div>
+        </div>
+
+        <!-- Transactions List -->
+        <div id="transactionsList" class="transactions-list">
+          <p class="no-data">No transactions found</p>
+        </div>
+      </main>
+    </div>
+
+    <div id="transactionModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Transaction</h2>
+          <p class="modal-subtitle">
+            Record a new income or expense transaction
+          </p>
+          <span class="close">&times;</span>
+        </div>
+
+        <form id="transactionForm">
+          <!-- Type Toggle Buttons -->
+          <div class="form-group type-toggle">
+            <button
+              type="button"
+              class="type-btn expense-btn active"
+              data-type="expense"
+            >
+              Expense
+            </button>
+            <button
+              type="button"
+              class="type-btn income-btn"
+              data-type="income"
+            >
+              Income
+            </button>
+            <input
+              type="hidden"
+              id="transactionType"
+              value="expense"
+              required
+            />
+          </div>
+
+          <!-- Amount Field -->
+          <div class="form-group">
+            <label for="amount">Amount <span class="required">*</span></label>
+            <div class="amount-input-wrapper">
+              <span class="currency-symbol">$</span>
+              <input
+                type="number"
+                id="amount"
+                step="0.01"
+                placeholder="0.00"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="form-group">
+            <label for="category"
+              >Category <span class="required">*</span></label
+            >
+            <select id="category" required>
+              <option value="Salary">Salary</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Coffee Shop">Coffee Shop</option>
+              <option value="Grocery Store">Grocery Store</option>
+              <option value="Netflix Subscription">Netflix Subscription</option>
+              <option value="Freelance Project">Freelance Project</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Date Field -->
+          <div class="form-group">
+            <label for="date">Date <span class="required">*</span></label>
+            <input type="date" id="date" required />
+          </div>
+
+          <!-- Description Field -->
+          <div class="form-group">
+            <label for="description"
+              >Description <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="description"
+              placeholder="e.g., Grocery shopping, Monthly rent..."
+              required
+            />
+          </div>
+
+          <!-- Receipt Upload (Optional) -->
+          <div class="form-group">
+            <label for="receipt">Receipt (Optional)</label>
+            <div class="receipt-upload">
+              <input type="file" id="receipt" accept="image/*" />
+              <div class="upload-placeholder">
+                <span class="upload-icon">📤</span>
+                <p>Click to upload receipt image</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-submit">Add Transaction</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/transactions.js"></script>
+  </body>
+</html>

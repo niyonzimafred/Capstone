@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics - Finance App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/analytics.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Finance</h2>
+          <p>Personal Tracker</p>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="transactions.html">✈️ Transactions</a></li>
+          <li><a href="categories.html">🏷️ Categories</a></li>
+          <li><a href="analytics.html" class="active">📈 Analytics</a></li>
+          <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+        <button id="logoutBtn" class="btn-logout">Sign Out</button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Top Header with User Info -->
+        <div class="top-header">
+          <h1 class="page-title">Analytics</h1>
+          <div class="user-info">
+            <div class="user-details">
+              <p id="userDisplayName">John Doe</p>
+              <p id="userEmail">john@example.com</p>
+            </div>
+            <div class="user-avatar">👤</div>
+          </div>
+        </div>
+
+        <!-- Page Description -->
+        <div class="page-intro">
+          <div class="intro-text">
+            <h2>Analytics</h2>
+            <p>Visualize your spending patterns and financial insights</p>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+              <div class="stat-label">Top Category</div>
+              <div class="stat-amount" id="topCategory">$450.00</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📈</div>
+            <div class="stat-content">
+              <div class="stat-label">Total Income (YTD)</div>
+              <div class="stat-amount income" id="totalIncomeYTD">
+                $20,940.00
+              </div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📉</div>
+            <div class="stat-content">
+              <div class="stat-label">Total Expense (YTD)</div>
+              <div class="stat-amount expense" id="totalExpenseYTD">
+                $10,606.00
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Income vs Expense</h3>
+            <canvas id="incomeExpenseChart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Spending by Category</h3>
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="summary-section">
+          <h3>Summary</h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <div class="summary-label">Savings Rate</div>
+              <div class="summary-value savings" id="savingsRate">52%</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Average Monthly Expense</div>
+              <div class="summary-value" id="avgMonthlyExpense">$1,767.67</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Average Monthly Income</div>
+              <div class="summary-value income" id="avgMonthlyIncome">
+                $3,490.00
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/analytics.js"></script>
+  </body>
+</html>

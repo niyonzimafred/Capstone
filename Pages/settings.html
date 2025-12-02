@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Finance App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/settings.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Finance</h2>
+          <p>Personal Tracker</p>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="transactions.html">✈️ Transactions</a></li>
+          <li><a href="categories.html">🏷️ Categories</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="settings.html" class="active">⚙️ Settings</a></li>
+        </ul>
+        <button id="logoutBtn" class="btn-logout">Sign Out</button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Top Header with User Info -->
+        <div class="top-header">
+          <h1 class="page-title">⚙️ Settings</h1>
+          <div class="user-info">
+            <div class="user-details">
+              <h3>John Doe</h3>
+              <p>john@example.com</p>
+            </div>
+            <div class="user-avatar">👤</div>
+          </div>
+        </div>
+
+        <!-- Settings Tabs -->
+        <div class="settings-tabs">
+          <button class="tab-btn active" data-tab="profile">👤 Profile</button>
+          <button class="tab-btn" data-tab="preferences">⚙️ Preferences</button>
+          <button class="tab-btn" data-tab="account">🔐 Account</button>
+          <button class="tab-btn" data-tab="danger">⚠️ Danger Zone</button>
+        </div>
+
+        <!-- Profile Tab -->
+        <div id="profile" class="tab-content active">
+          <div class="settings-card">
+            <h3>👤 Profile Information</h3>
+
+            <div class="form-group">
+              <label for="displayName"
+                >Display Name <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="displayName"
+                placeholder="Enter your display name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email <span class="required">*</span></label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                disabled
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="profilePic">Profile Picture</label>
+              <input type="file" id="profilePic" accept="image/*" />
+              <small>Choose an image for your profile (optional)</small>
+            </div>
+
+            <button id="profileSave" class="btn-primary">
+              💾 Save Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Preferences Tab -->
+        <div id="preferences" class="tab-content">
+          <div class="settings-card">
+            <h3>⚙️ Preferences</h3>
+
+            <div class="form-group">
+              <label for="currency">Default Currency</label>
+              <select id="currency">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+              </select>
+            </div>
+
+            <div class="form-group checkbox">
+              <input type="checkbox" id="notifications" />
+              <label for="notifications">Enable Notifications</label>
+            </div>
+
+            <button id="preferencesSaveBtn" class="btn-primary">
+              💾 Save Preferences
+            </button>
+          </div>
+        </div>
+
+        <!-- Account Tab -->
+        <div id="account" class="tab-content">
+          <div class="settings-card">
+            <h3>🔐 Account Settings</h3>
+
+            <div class="form-group">
+              <label for="oldPassword"
+                >Current Password <span class="required">*</span></label
+              >
+              <input
+                type="password"
+                id="oldPassword"
+                placeholder="Enter your current password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword"
+                >New Password <span class="required">*</span></label
+              >
+              <input
+                type="password"
+                id="newPassword"
+                minlength="6"
+                placeholder="Enter new password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword"
+                >Confirm New Password <span class="required">*</span></label
+              >
+              <input
+                type="password"
+                id="confirmPassword"
+                minlength="6"
+                placeholder="Confirm new password"
+                required
+              />
+            </div>
+
+            <button id="accountSaveBtn" class="btn-primary">
+              🔒 Change Password
+            </button>
+          </div>
+        </div>
+
+        <!-- Danger Zone Tab -->
+        <div id="danger" class="tab-content">
+          <div class="settings-card danger-zone">
+            <h3>⚠️ Danger Zone</h3>
+            <p class="danger-text">
+              These actions are permanent and cannot be undone. Please proceed
+              with caution.
+            </p>
+
+            <div class="danger-action">
+              <h4>Delete All Data</h4>
+              <p>
+                Permanently remove all your transactions, categories, and
+                settings
+              </p>
+              <button id="deleteData" class="btn-danger">
+                🗑️ Delete All Data
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="message" class="message"></div>
+      </main>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/settings.js"></script>
+  </body>
+</html>

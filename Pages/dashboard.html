@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Finance App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Finance</h2>
+          <p>Personal Tracker</p>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html" class="active">📊 Dashboard</a></li>
+          <li><a href="transactions.html">✈️ Transactions</a></li>
+          <li><a href="categories.html">🏷️ Categories</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+        <button id="logoutBtn" class="btn-logout">Sign Out</button>
+      </nav>
+
+      <main class="main-content">
+        <div class="top-header">
+          <h1 class="page-title">Dashboard</h1>
+          <div class="user-info">
+            <div class="user-details">
+              <p id="userDisplayName">John Doe</p>
+              <p id="userEmail">john@example.com</p>
+            </div>
+            <div class="user-avatar">👤</div>
+          </div>
+        </div>
+
+        <header class="page-header">
+          <p id="welcomeMessage">Welcome back!</p>
+        </header>
+
+        <div class="dashboard-section">
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="card-header">
+                <h3>Total Balance</h3>
+                <span class="icon">$</span>
+              </div>
+              <p class="amount" id="totalBalance">$0.00</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>This Month Income</h3>
+                <span class="icon income-icon">📈</span>
+              </div>
+              <p class="amount income" id="totalIncome">$0.00</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>This Month Expense</h3>
+                <span class="icon expense-icon">📉</span>
+              </div>
+              <p class="amount expense" id="totalExpenses">$0.00</p>
+            </div>
+          </div>
+
+          <div class="chart-section card">
+            <h2>Balance Trend</h2>
+            <canvas id="balanceTrendChart"></canvas>
+          </div>
+        </div>
+
+        <div class="recent-transactions-section">
+          <div class="section-header">
+            <h2>Recent Transactions</h2>
+            <button id="addTransactionBtn" class="btn-add-transaction">
+              + Add Transaction
+            </button>
+          </div>
+          <div id="recentTransactionsList" class="transactions-list">
+            <p class="no-data">No transactions yet</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div id="transactionModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Transaction</h2>
+          <p class="modal-subtitle">
+            Record a new income or expense transaction
+          </p>
+          <span class="close">&times;</span>
+        </div>
+
+        <form id="transactionForm">
+          <!-- Type Toggle Buttons -->
+          <div class="form-group type-toggle">
+            <button
+              type="button"
+              class="type-btn expense-btn active"
+              data-type="expense"
+            >
+              Expense
+            </button>
+            <button
+              type="button"
+              class="type-btn income-btn"
+              data-type="income"
+            >
+              Income
+            </button>
+            <input
+              type="hidden"
+              id="transactionType"
+              value="expense"
+              required
+            />
+          </div>
+
+          <!-- Amount Field -->
+          <div class="form-group">
+            <label for="amount">Amount <span class="required">*</span></label>
+            <div class="amount-input-wrapper">
+              <span class="currency-symbol">$</span>
+              <input
+                type="number"
+                id="amount"
+                step="0.01"
+                placeholder="0.00"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="form-group">
+            <label for="category"
+              >Category <span class="required">*</span></label
+            >
+            <select id="category" required>
+              <option value="Salary">Salary</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Coffee Shop">Coffee Shop</option>
+              <option value="Grocery Store">Grocery Store</option>
+              <option value="Netflix Subscription">Netflix Subscription</option>
+              <option value="Freelance Project">Freelance Project</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Date Field -->
+          <div class="form-group">
+            <label for="date">Date <span class="required">*</span></label>
+            <input type="date" id="date" required />
+          </div>
+
+          <!-- Description Field -->
+          <div class="form-group">
+            <label for="description"
+              >Description <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="description"
+              placeholder="e.g., Grocery shopping, Monthly rent..."
+              required
+            />
+          </div>
+
+          <!-- Receipt Upload (Optional) -->
+          <div class="form-group">
+            <label for="receipt">Receipt (Optional)</label>
+            <div class="receipt-upload">
+              <input type="file" id="receipt" accept="image/*" />
+              <div class="upload-placeholder">
+                <span class="upload-icon">📤</span>
+                <p>Click to upload receipt image</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-submit">Add Transaction</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

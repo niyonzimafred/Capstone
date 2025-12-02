@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories - Finance App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/categories.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h2>Finance</h2>
+          <p>Personal Tracker</p>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="transactions.html">✈️ Transactions</a></li>
+          <li><a href="categories.html" class="active">🏷️ Categories</a></li>
+          <li><a href="analytics.html">📈 Analytics</a></li>
+          <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+        <button id="logoutBtn" class="btn-logout">Sign Out</button>
+      </nav>
+
+      <main class="main-content">
+        <!-- Top Header with User Info -->
+        <div class="top-header">
+          <h1 class="page-title">Categories</h1>
+          <div class="user-info">
+            <div class="user-details">
+              <p id="userDisplayName">John Doe</p>
+              <p id="userEmail">john@example.com</p>
+            </div>
+            <div class="user-avatar">👤</div>
+          </div>
+        </div>
+
+        <!-- Page Description and Add Button -->
+        <div class="page-intro">
+          <div class="intro-text">
+            <h2>Categories</h2>
+            <p>Manage your transaction categories</p>
+          </div>
+          <button id="addCategoryBtn" class="btn-add-transaction">
+            + Add Category
+          </button>
+        </div>
+
+        <!-- Income Categories Section -->
+        <div class="categories-section">
+          <h3 class="section-title income-title">
+            🏷️ Income Categories (<span id="incomeCount">0</span>)
+          </h3>
+          <div id="incomeCategoriesList" class="categories-container">
+            <p class="no-data">No income categories yet</p>
+          </div>
+        </div>
+
+        <!-- Expense Categories Section -->
+        <div class="categories-section">
+          <h3 class="section-title expense-title">
+            🏷️ Expense Categories (<span id="expenseCount">0</span>)
+          </h3>
+          <div id="expenseCategoriesList" class="categories-container">
+            <p class="no-data">No expense categories yet</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="categoryModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Category</h2>
+          <p class="modal-subtitle">Create a new transaction category</p>
+          <span class="close">&times;</span>
+        </div>
+
+        <form id="categoryForm">
+          <!-- Category Name -->
+          <div class="form-group">
+            <label for="categoryName"
+              >Category Name <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="categoryName"
+              placeholder="e.g., Groceries, Coffee..."
+              required
+            />
+          </div>
+
+          <!-- Category Type -->
+          <div class="form-group">
+            <label for="categoryType"
+              >Type <span class="required">*</span></label
+            >
+            <select id="categoryType" required>
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </div>
+
+          <!-- Category Color -->
+          <div class="form-group">
+            <label for="categoryColor"
+              >Color <span class="required">*</span></label
+            >
+            <div class="color-picker-wrapper">
+              <input type="color" id="categoryColor" value="#ef4444" />
+              <span
+                class="color-preview"
+                id="colorPreview"
+                style="background-color: #ef4444"
+              ></span>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-submit">Add Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/categories.js"></script>
+  </body>
+</html>
